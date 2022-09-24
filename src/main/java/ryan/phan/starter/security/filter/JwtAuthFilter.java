@@ -1,4 +1,4 @@
-package ryan.phan.starter.filter;
+package ryan.phan.starter.security.filter;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package ryan.phan.starter.config;
+package ryan.phan.starter.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,10 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ryan.phan.starter.controller.common.AuthEntryPointJwt;
-import ryan.phan.starter.filter.JwtAuthFilter;
+import ryan.phan.starter.security.filter.JwtAuthFilter;
 import ryan.phan.starter.service.UserService;
 
 @Configuration

@@ -1,4 +1,4 @@
-package ryan.phan.starter.controller.common;
+package ryan.phan.starter.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
