@@ -39,3 +39,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	archivesBaseName = "spring_starter"
+	archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
