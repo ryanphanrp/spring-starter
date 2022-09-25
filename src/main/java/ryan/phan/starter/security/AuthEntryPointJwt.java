@@ -7,7 +7,6 @@ import ryan.phan.starter.constant.common.ResponseCode;
 import ryan.phan.starter.dto.common.ResponseDto;
 import ryan.phan.starter.utils.JSONUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
