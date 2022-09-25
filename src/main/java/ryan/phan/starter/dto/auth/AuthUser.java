@@ -14,7 +14,7 @@ public class AuthUser extends User {
     private final Role role;
 
     public AuthUser(Long Id, String username, String password, Role role) {
-        super(username, password, Collections.singleton(new SimpleGrantedAuthority(role.toString())));
+        super(username, password, Collections.singleton(new SimpleGrantedAuthority("ROLE_" + role.toString())));
         this.Id = Id;
         this.username = username;
         this.role = role;

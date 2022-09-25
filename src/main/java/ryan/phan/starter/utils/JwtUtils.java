@@ -21,11 +21,11 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class JwtUtils {
-    @Value("${security.jwt.secret_key}")
-    private static String JWT_SECRET;
+//    @Value("${security.jwt.secret_key}")
+    private static String JWT_SECRET = "thisissecretkeyforstarterspringbootprojectoftinhtutexinchaomoinguoinhatoisecogangdatduoc";
 
-    @Value("${security.jwt.expiration}")
-    private static long JWT_EXPIRATION;
+//    @Value("${security.jwt.expiration}")
+    private static long JWT_EXPIRATION = 604800000;
 
     public static String generate(String username) {
         Date now = new Date();

@@ -32,7 +32,7 @@ public class TaskController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseDto<List<TaskDto>> list() {
         List<TaskDto> list = service.getList();
         return new ResponseDto<>(ResponseCode.OK, list);
