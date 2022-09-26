@@ -21,13 +21,16 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class JwtUtils {
-//    @Value("${security.jwt.secret_key}")
-    private static String JWT_SECRET = "thisissecretkeyforstarterspringbootprojectoftinhtutexinchaomoinguoinhatoisecogangdatduoc";
+    @Value("${security.jwt.secret_key}")
+    private String JWT_SECRET;
 
-//    @Value("${security.jwt.expiration}")
-    private static long JWT_EXPIRATION = 604800000;
+    @Value("${security.jwt.expiration}")
+    private long JWT_EXPIRATION;
 
-    public static String generate(String username) {
+    private JwtUtils() {
+    }
+
+    public String generate(String username) {
         Date now = new Date();
         Date expiration = new Date(System.currentTimeMillis() + JWT_EXPIRATION);
         return Jwts.builder()
@@ -38,12 +41,12 @@ public class JwtUtils {
                 .compact();
     }
 
-    public static String getUsernameFromJWT(String token) {
+    public String getUsernameFromJWT(String token) {
         Claims claims = makeJwtParser().parseClaimsJws(token).getBody();
         return claims.getId();
     }
 
-    public static boolean validate(String token) {
+    public boolean validate(String token) {
         if (Objects.isNull(token)) return false;
         try {
             makeJwtParser().parseClaimsJws(token);
@@ -65,12 +68,12 @@ public class JwtUtils {
     }
 
     // Make JWT Parser
-    private static JwtParser makeJwtParser() {
+    private JwtParser makeJwtParser() {
         return Jwts.parserBuilder().setSigningKey(toSigningKey()).build();
     }
 
     // Make Sign Key with HMAC
-    private static Key toSigningKey() {
+    private Key toSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(JWT_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
