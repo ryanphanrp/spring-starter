@@ -14,18 +14,16 @@ import ryan.phan.starter.utils.JwtUtils;
 public class AuthServiceImpl implements AuthService {
 
     final AuthenticationManager authenticationManager;
-    final JwtUtils jwtUtils;
 
-    public AuthServiceImpl(AuthenticationManager auth, JwtUtils jwtUtils) {
+    public AuthServiceImpl(AuthenticationManager auth) {
         this.authenticationManager = auth;
-        this.jwtUtils = jwtUtils;
     }
 
     public LoginResponseDto login(LoginDto dto) {
         final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));     // Xác thực từ username và password.
         SecurityContextHolder.getContext().setAuthentication(authentication);   // Set thông tin authentication vào Security Context
         final AuthUser user = (AuthUser) authentication.getPrincipal(); // Get username
-        String jwt = jwtUtils.generate(user.getUsername()); // Trả về jwt cho người dùng.
+        String jwt = JwtUtils.generate(user.getUsername()); // Trả về jwt cho người dùng.
         return new LoginResponseDto(jwt);
     }
 }

@@ -11,6 +11,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -21,18 +22,26 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class JwtUtils {
-    @Value("${security.jwt.secret_key}")
-    private String JWT_SECRET;
 
-    @Value("${security.jwt.expiration}")
-    private long JWT_EXPIRATION;
+    private static String jwtSecret;
+    private static long jwtExpiration;
 
     private JwtUtils() {
     }
 
-    public String generate(String username) {
+    @Value("${security.jwt.secret_key}")
+    public synchronized void setJwtSecret(String jwtSecret) {
+        JwtUtils.jwtSecret = jwtSecret;
+    }
+
+    @Value("${security.jwt.expiration}")
+    public synchronized void setJwtExpiration(long jwtExpiration) {
+        JwtUtils.jwtExpiration = jwtExpiration;
+    }
+
+    public static String generate(String username) {
         Date now = new Date();
-        Date expiration = new Date(System.currentTimeMillis() + JWT_EXPIRATION);
+        Date expiration = new Date(System.currentTimeMillis() + jwtExpiration);
         return Jwts.builder()
                 .setId(username)
                 .setIssuedAt(now)
@@ -41,12 +50,12 @@ public class JwtUtils {
                 .compact();
     }
 
-    public String getUsernameFromJWT(String token) {
+    public static String getUsernameFromJWT(String token) {
         Claims claims = makeJwtParser().parseClaimsJws(token).getBody();
         return claims.getId();
     }
 
-    public boolean validate(String token) {
+    public static boolean validate(String token) {
         if (Objects.isNull(token)) return false;
         try {
             makeJwtParser().parseClaimsJws(token);
@@ -68,13 +77,13 @@ public class JwtUtils {
     }
 
     // Make JWT Parser
-    private JwtParser makeJwtParser() {
+    private static JwtParser makeJwtParser() {
         return Jwts.parserBuilder().setSigningKey(toSigningKey()).build();
     }
 
     // Make Sign Key with HMAC
-    private Key toSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(JWT_SECRET);
+    private static Key toSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

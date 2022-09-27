@@ -9,12 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
 @Table(name = User.TABLE_NAME)
-public class User {
+public class User implements Serializable {
     public static final String TABLE_NAME = "users";
 
     @Id

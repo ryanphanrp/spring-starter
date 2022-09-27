@@ -26,9 +26,9 @@ public class TaskController {
         this.service = service;
     }
 
-    @GetMapping("/{Id}")
-    public ResponseDto<Task> detail(@PathVariable Long Id) {
-        return new ResponseDto<>(ResponseCode.OK, service.getDetail(Id));
+    @GetMapping("/{id}")
+    public ResponseDto<Task> detail(@PathVariable Long id) {
+        return new ResponseDto<>(ResponseCode.OK, service.getDetail(id));
     }
 
     @GetMapping

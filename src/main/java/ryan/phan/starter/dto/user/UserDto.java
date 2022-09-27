@@ -7,12 +7,12 @@ import ryan.phan.starter.entity.User;
 @Data
 @NoArgsConstructor
 public class UserDto {
-    private Long Id;
+    private Long id;
     private String name;
     private String username;
 
     public UserDto(User user) {
-        this.Id = user.getId();
+        this.id = user.getId();
         this.name = user.getName();
         this.username = user.getUsername();
     }

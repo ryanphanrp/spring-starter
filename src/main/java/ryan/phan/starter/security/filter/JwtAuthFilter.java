@@ -20,10 +20,8 @@ import java.util.Objects;
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
     final UserService userService;
-    final JwtUtils jwtUtils;
-    public JwtAuthFilter(UserService userService, JwtUtils jwtUtils) {
+    public JwtAuthFilter(UserService userService) {
         this.userService = userService;
-        this.jwtUtils = jwtUtils;
     }
 
     @Override
@@ -34,9 +32,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         try {
             // Get JWT token from request
             String token = extractJwt(request);
-            if (jwtUtils.validate(token)) {
+            if (JwtUtils.validate(token)) {
                 // Get username from Jwt token
-                String username = jwtUtils.getUsernameFromJWT(token);
+                String username = JwtUtils.getUsernameFromJWT(token);
 
                 // Validate username and Authentication Context
                 if (Objects.nonNull(username) && Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {

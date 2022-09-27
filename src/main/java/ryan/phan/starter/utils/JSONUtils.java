@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 public class JSONUtils {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    private JSONUtils() {
+    }
+
     public static<R> R parse(String json, Class<R> clazz) {
         try {
             return objectMapper.readValue(json, clazz);

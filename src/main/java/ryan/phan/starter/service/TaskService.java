@@ -7,7 +7,7 @@ import ryan.phan.starter.entity.Task;
 import java.util.List;
 
 public interface TaskService {
-    Task getDetail(Long Id);
+    Task getDetail(Long id);
     List<TaskDto> getList();
     TaskDto createTask(CreateTaskDto body);
 }
