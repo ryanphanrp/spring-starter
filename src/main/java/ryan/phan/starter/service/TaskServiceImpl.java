@@ -24,8 +24,8 @@ public class TaskServiceImpl implements TaskService {
         this.userRepository = userRepository;
     }
 
-    public Task getDetail(Long Id) {
-        return repository.findTaskById(Id)
+    public Task getDetail(Long id) {
+        return repository.findTaskById(id)
                 .orElseThrow(() -> new GlobalAppException(ResponseCode.BAD_REQUEST));
     }
 

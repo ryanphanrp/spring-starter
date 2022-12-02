@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ryan.phan.starter.constant.common.WhiteList;
 import ryan.phan.starter.security.filter.JwtAuthFilter;
 import ryan.phan.starter.service.UserService;
 
@@ -20,11 +21,6 @@ import ryan.phan.starter.service.UserService;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final String[] WHITE_LIST = {
-            "/auth/**",
-            "/users"
-    };
 
     @Autowired
     UserService userService;
@@ -57,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(WHITE_LIST).permitAll()
+                .antMatchers(WhiteList.URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

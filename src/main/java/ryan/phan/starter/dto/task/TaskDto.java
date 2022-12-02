@@ -9,7 +9,7 @@ import ryan.phan.starter.entity.Task;
 @Data
 @NoArgsConstructor
 public class TaskDto {
-    private Long Id;
+    private Long id;
     private String title;
     private String description;
     private Priority priority;
@@ -18,7 +18,7 @@ public class TaskDto {
     private long updateDt;
 
     public TaskDto(Task entity) {
-        this.Id = entity.getId();
+        this.id = entity.getId();
         this.title = entity.getTitle();
         this.description = entity.getDescription();
         this.priority = entity.getPriority();

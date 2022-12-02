@@ -26,13 +26,13 @@ public class TaskController {
         this.service = service;
     }
 
-    @GetMapping("/{Id}")
-    public ResponseDto<Task> detail(@PathVariable Long Id) {
-        return new ResponseDto<>(ResponseCode.OK, service.getDetail(Id));
+    @GetMapping("/{id}")
+    public ResponseDto<Task> detail(@PathVariable Long id) {
+        return new ResponseDto<>(ResponseCode.OK, service.getDetail(id));
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseDto<List<TaskDto>> list() {
         List<TaskDto> list = service.getList();
         return new ResponseDto<>(ResponseCode.OK, list);
